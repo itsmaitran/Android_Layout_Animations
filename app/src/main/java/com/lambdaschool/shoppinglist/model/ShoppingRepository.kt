@@ -1,0 +1,24 @@
+package com.lambdaschool.shoppinglist.model
+
+import com.lambdaschool.sprint2_challenge.itemIds
+import com.lambdaschool.sprint2_challenge.itemNames
+
+class ShoppingRepository {
+    companion object {
+        val shoppingList = mutableListOf<Shopping>()
+
+        // Creates the shopping list from the ShoppingItemConstants file based on the size and then generates itemNames with the itemIds.
+        // isAdded becomes true once the item is selected.
+        fun createShoppingList() {
+            for (i in 0 until itemNames.size) {
+                shoppingList.add(
+                    Shopping(
+                        itemNames[i],
+                        itemIds[i],
+                        isAdded = false
+                    )
+                )
+            }
+        }
+    }
+}
