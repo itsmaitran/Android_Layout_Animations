@@ -3,6 +3,7 @@ package com.lambdaschool.androidlayoutanimations.adapter
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,7 +73,10 @@ class ShoppingListAdapter (val shoppingList: MutableList<Shopping>) :
             val intent = Intent(view.context, ItemDetailActivity::class.java)
             intent.putExtra(ItemDetailActivity.ITEM_KEY, item)
 
-            view.context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(view.context as Activity).toBundle())
+            val optionsBundle: Bundle =
+                ActivityOptions.makeSceneTransitionAnimation(view.context as Activity, holder.itemImageView, "shared_image").toBundle()
+
+            view.context.startActivity(intent, optionsBundle)
         }
 
         setEnterAnimation(holder.card, position)

@@ -2,8 +2,6 @@ package com.lambdaschool.androidlayoutanimations.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Fade
-import android.view.Window
 import androidx.core.content.ContextCompat
 import com.lambdaschool.androidlayoutanimations.R
 import com.lambdaschool.androidlayoutanimations.model.Shopping
@@ -17,10 +15,6 @@ class ItemDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-        window.enterTransition = Fade()
-        window.exitTransition = Fade()
 
         setContentView(R.layout.activity_item_detail)
 
