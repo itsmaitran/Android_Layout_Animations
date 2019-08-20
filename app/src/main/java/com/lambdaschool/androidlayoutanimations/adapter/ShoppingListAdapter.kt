@@ -28,6 +28,7 @@ class ShoppingListAdapter (val shoppingList: MutableList<Shopping>) :
     private var lastPosition = -1
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val card = view.card_view as CardView
         val itemImageView = view.iv_product_image as ImageView
         val itemNameView = view.tv_product_name as TextView
         val shoppingItemParent = view.ll_shopping_list
@@ -62,10 +63,26 @@ class ShoppingListAdapter (val shoppingList: MutableList<Shopping>) :
         val item = shoppingList[position]
         holder.bindModel(item)
 
-        holder.shoppingItemParent.setOnClickListener {
-            item.isAdded = !item.isAdded
+        //holder.shoppingItemParent.setOnClickListener {
+        //    item.isAdded = !item.isAdded
 
-            notifyItemChanged(position)
+        //    notifyItemChanged(position)
+
+        holder.card.setOnClickListener { view ->
+            val intent = Intent(view.context, ItemDetailActivity::class.java)
+            intent.putExtra(ItemDetailActivity.ITEM_KEY, item)
+
+            view.context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(view.context as Activity).toBundle())
+        }
+
+        setEnterAnimation(holder.card, position)
+    }
+
+    private fun setEnterAnimation(viewToAnimate: View, position: Int) {
+        if (position > lastPosition) {
+            val animation: Animation = AnimationUtils.loadAnimation(viewToAnimate.context, R.anim.my_slide_in_left)
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
         }
     }
 }
